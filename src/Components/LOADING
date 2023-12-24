@@ -1,0 +1,66 @@
+// // LoadingContext.js
+// import React, { createContext, useContext, useState } from 'react';
+
+// const LoadingContext = createContext();
+
+// export const LoadingProvider = ({ children }) => {
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   const showLoading = () => setIsLoading(true);
+//   const hideLoading = () => setIsLoading(false);
+
+//   return (
+//     <LoadingContext.Provider value={{ isLoading, showLoading, hideLoading }}>
+//       {children}
+//     </LoadingContext.Provider>
+//   );
+// };
+
+// export const useLoading = () => {
+//   return useContext(LoadingContext);
+// };
+
+
+// import { useLoading } from './LoadingContext';
+
+// const HomeComponent1 = ({ onComponentLoad }) => {
+//   const { showLoading, hideLoading } = useLoading();
+
+//   useEffect(() => {
+//     showLoading();
+
+//     // Simulación de carga de datos desde la base de datos
+//     setTimeout(() => {
+//       // Lógica de carga de datos
+
+//       onComponentLoad(); // Indicar que este componente ha cargado los datos
+//       hideLoading();
+//     }, 2000);
+//   }, [showLoading, hideLoading, onComponentLoad]);
+
+//   return <div>Componente 1</div>;
+// };
+
+// const Home = () => {
+//   const { isLoading, showLoading, hideLoading } = useLoading();
+//   const [component1Loaded, setComponent1Loaded] = React.useState(false);
+
+//   const handleComponent1Load = () => setComponent1Loaded(true);
+
+//   useEffect(() => {
+//     // Puedes realizar acciones adicionales cuando todos los componentes estén cargados
+//     if (component1Loaded) {
+//       // Acciones adicionales después de cargar todos los componentes
+//     }
+//   }, [component1Loaded]);
+
+//   return (
+//     <div>
+//       {isLoading && <p>Cargando...</p>}
+
+//       <HomeComponent1 onComponentLoad={handleComponent1Load} />
+//     </div>
+//   );
+// };
+
+// export default Home;

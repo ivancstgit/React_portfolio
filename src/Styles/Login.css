@@ -1,0 +1,173 @@
+
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+  } 
+ 
+.errmsg {
+    background-color: rgb(255, 46, 77);
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  } 
+
+
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    /*background: url('https://us.123rf.com/450wm/natrot/natrot1608/natrot160800105/61348388-degradado-azul-abstracto-se-utiliza-como-fondo-para-la-exhibici%C3%B3n-de-productos-vector.jpg') no-repeat;*/
+    background: url('https://i.pinimg.com/originals/18/ad/b7/18adb7094eb7d2a71d4bfc6d8c58ef29.jpg') no-repeat;
+    background-color: gray;
+    background-size: cover;
+    background-position: center;
+    animation: animateBg 9s infinite;
+}
+
+.wrapperNo{
+    animation: none;
+}
+
+@keyframes animateBg {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(135deg);
+    }
+    100% {
+        filter: hue-rotate(0deg);
+    }
+}
+
+.login-box {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    background: transparent;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3); /* Estilo de resaltado con sombra */
+}
+
+.login-text {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+} 
+
+.input-box {
+    position: relative;
+    width: 310px;
+    margin: 30px 0;
+    border-bottom: 1px solid #fff;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus ~label,
+.input-box input:valid ~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    padding: 0 35px 0 5px;
+}
+
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    color: #fff;
+    transform: translateY(-50%);
+}
+
+.remember-forgot {
+    margin: -15px 15px;
+    font-size: .9em;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+button.buttonLogin {
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #000;
+    font-weight: 500;
+}
+
+.register-link {
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 10px;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+
+
+@media (max-width:500px) {
+    .login-box {
+        width: 100%;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+    }
+
+    .input-box {
+        width: 290px;
+    }
+}

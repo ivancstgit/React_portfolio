@@ -1,0 +1,8 @@
+.footer::after{
+    position: absolute;
+    height: 1px;
+    width: 70px;
+    background:rgb(156 163 175);
+    content: "";
+    margin-top: 24px;
+}

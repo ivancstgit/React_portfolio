@@ -1,0 +1,8 @@
+.text {
+    transition: transform 0.5s ease-in-out;
+    cursor: pointer;
+  }
+
+.text.moved {
+   transform: translateX(100%); /* Mueve el texto fuera de la pantalla hacia la derecha */
+}

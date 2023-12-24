@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat';
+}
+
+body {
+  max-width: 100%;
+  margin: 0 auto; /* Centra el cuerpo de la página horizontalmente */
+  overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal si el contenido excede el ancho de la ventana del navegador */
+}
+
+.instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.hide {
+  display: none;
+}
+
+.valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+
+.line {
+  display: inline-block;
+}
+
+

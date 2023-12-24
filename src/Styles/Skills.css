@@ -1,0 +1,46 @@
+.progress {
+    --progress: 0%;
+    width: auto;
+    height: 40px;
+    border: 1px solid #fff;
+    padding: 12px 10px;
+    box-shadow: 0 0 10px #aaa;
+  }
+  
+  .progress .bar {
+    width: var(--progress);
+    height: 100%;
+    /*background: linear-gradient(#f2f2f2, #000000, #f2f2f2);*/
+    background-repeat: repeat;
+    box-shadow: 0 0 10px 0px #cccccc;
+    animation: 
+      shine 10s ease-in infinite,
+      end ease-out 1 7s;
+    transition: width 3s ease 3s;
+  }
+
+  .progress-dark{
+    
+    background: linear-gradient(#f2f2f2, #000000, #f2f2f2);
+  }
+
+  .progress-light{
+    background: linear-gradient(#648285, #eaffff, #a3c4c2);
+
+  }
+  
+  @property --progress {
+    syntax: "<length>";
+    initial-value: 0%;
+    inherits: true;
+  }
+  
+  @keyframes shine {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 56px; }
+  }
+  
+  @keyframes end {
+    0%, 100% { box-shadow: 0 0 10px 0px #cccccc; }
+    50% { box-shadow: 0 0 15px 5px #cccccc; }
+  }
