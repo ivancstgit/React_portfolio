@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
 import '../../Styles/Loading.css'
 
-const Loading = ({mode}) => (
-  <div className={`min-h-screen flex justify-center items-center  ${mode ? "" : ""}`}>
-    <div className={` select-none ${mode ? "loader_dark" : "loader_light"}`}>
-    Loading...
-    </div>
-    </div>
+export default function Loading({ mode }) {
+  const [flag, setFlag] = useState();
 
-);
 
-export default Loading;
+  useEffect(() => {
+    setTimeout(() => {
+      setFlag(true);
+    }, 20000);
+  })
+
+  return (
+    <div className={`min-h-screen flex flex-col justify-center items-center  ${mode ? "" : ""}`}>
+      <div className={` select-none ${mode ? "loader_dark" : "loader_light"}`}>
+        Loading...
+      </div>
+
+      {flag && (
+        <div className="pt-24">Taking too long? Please try again later</div>
+      )}
+    </div>
+  )
+}

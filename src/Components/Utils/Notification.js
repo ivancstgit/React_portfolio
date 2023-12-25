@@ -8,15 +8,11 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import '../../Styles/Notification.css'
 import { get } from 'react-scroll/modules/mixins/scroller';
 
-export default function Notification({ message, type, status }) {
+export default function Notification({ message, type, status, toggleShow }) {
     const [getType, setType] = useState();
     const [getColor, setColor] = useState();
-    const [show, setShow] = useState(false);
 
-    useEffect(() => {
-        setShow(status);
-    }, [status])
-
+    const [visibility, setVisibility] = useState(false);
 
     useEffect(() => {
         switch (type) {
@@ -47,34 +43,13 @@ export default function Notification({ message, type, status }) {
 
     }, [type])
 
-
     useEffect(() => {
-        let timerId;
-
-        if (show) {
-            // Si show es true, configuramos un temporizador para ejecutar la función después de 3 segundos
-            timerId = setTimeout(() => {
-                // La función que se ejecutará después de 3 segundos si show es true
-                toggleShow()
-                // Aquí puedes llamar a la función que necesitas ejecutar
-            }, 3000);
-        }
-
-        // Limpieza del temporizador cuando el componente se desmonta o cuando show cambia a false
-        return () => {
-            clearTimeout(timerId);
-        };
-    }, [show]);
-
-    const toggleShow = () => {
-        setShow(!show);
-    }
-
-
-
+        setVisibility(status);
+    }, [status])
+    
     return (
         <div className='fixed notification absolute text-white flex justify-center'>
-            <div className={`z-40 overlay ${show ? 'active' : ''} items-center justify-center flex`}>
+            <div className={`z-40  overlay ${visibility ? "active" :""}  items-center justify-center flex`}>
                 <div className='w-auto h-auto items-center justify-center flex'>
                 <div className={`absolute rounded shadow-not bg-black ${type} py-5 px-6 shadow shadow-${getColor}-700  items-center justify-center flex`}>
 

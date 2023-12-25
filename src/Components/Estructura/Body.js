@@ -29,13 +29,26 @@ export default function Body({ mode, toggleDarkMode}) {
   const [experienceData, setExperienceData] = useState();
   const [proyectsData, setProyectsData] = useState();
 
-  const [typeNot, setTypeNot] = useState();
   const [hasError, setHasError] = useState(false);
-  const [getMessageNot, setMessageNot] = useState();
-  const [notVisible, setNotVisible] = useState(false);
   const [userRole, setUserRole] = useState();
 
+  //NOTIFICATION PARAMS
+  const [visibleNot, setVisibleNot] = useState(false);
+  const [textNot, setTextNot] = useState();
+  const [typeNot, setTypeNot] = useState();
+  const [flagWelcome, setFlagWelcome] = useState(true);
 
+  const toggleShow = () =>{
+    setVisibleNot(visible => !visible);
+  }
+  //----------------------------------
+
+
+  //welcome notification
+  const toggleWelcome = () =>{
+    setFlagWelcome(false)
+  }
+  
   useEffect(() => {
         const access_token = localStorage.getItem('access_token');
         const decoded = jwtDecode(access_token);
@@ -44,144 +57,81 @@ export default function Body({ mode, toggleDarkMode}) {
         } else {
           setUserRole("Welcome you are logged as Guest")
         }
-        
+
+        setTimeout(() => {
+          // La función que se ejecutará después de 3 segundos si show es true
+          toggleWelcome();
+          // Aquí puedes llamar a la función que necesitas ejecutar
+        }, 3000);
     }, [])
-
-
-// HEADER DATA
-useEffect(() => {
-  const fetchData = async () => {
+//------------------------------------------------
+  const handleDataFetch = async (endpoint, setDataFunction) => {
     try {
       const token = localStorage.getItem('access_token');
-      const respuesta = await axios.get(`/contact`, {
+      const respuesta = await axios.get(endpoint, {
         headers: {
           Authorization: 'Bearer ' + token,
-          "Content-Type": 'application/json',
+          'Content-Type': 'application/json',
         },
         withCredentials: true,
       });
-
-      setHeaderData(respuesta.data);
+      console.log(respuesta.data)
+      setDataFunction(respuesta.data);
+      
     } catch (error) {
       setHasError(true);
-      setNotVisible(true);
-      setTypeNot("error");
-      setMessageNot("Error fetching data... Please try again later");
+      setVisibleNot(true);
+      setTypeNot('error');
+      setTextNot('Error fetching data... Please try again later');
+      setTimeout(() => {
+        // La función que se ejecutará después de 3 segundos si show es true
+        setVisibleNot(visible => !visible);
+        // Aquí puedes llamar a la función que necesitas ejecutar
+      }, 3000);
     }
   };
 
-  fetchData();
-}, []);
+  useEffect(() => {
+    const access_token = localStorage.getItem('access_token');
+    const decoded = jwtDecode(access_token);
+    setUserRole(decoded.role === 'ADMIN' ? 'Welcome you are logged as Admin' : 'Welcome you are logged as Guest');
 
-// PROFILE DATA
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const token = localStorage.getItem('access_token');
-      const respuesta = await axios.get(`/profile/1`, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-          "Content-Type": 'application/json',
-        },
-        withCredentials: true,
-      });
-      setProfileData(respuesta.data.entity);
-    } catch (error) {
-      setHasError(true);
-      setNotVisible(true);
-      setTypeNot("error");
-      setMessageNot("Error fetching data... Please try again later");
-    }
-  };
+    setTimeout(() => {
+      toggleWelcome();
+    }, 3000);
+  }, []);
 
-  fetchData();
-}, []);
+  useEffect(() => {
+    handleDataFetch('/contact', setHeaderData);
+  }, []);
 
-// PROYECTS DATA
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const token = localStorage.getItem('access_token');
-      const respuesta = await axios.get(`/proyect`, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-          "Content-Type": 'application/json',
-        },
-        withCredentials: true,
-      });
-      setProyectsData(respuesta.data);
-    } catch (error) {
-      setHasError(true);
-      setTypeNot("error");
-      setNotVisible(true);
-      setMessageNot("Error fetching data... Please try again later");
-    }
-  };
+  useEffect(() => {
+    handleDataFetch('/profile/1', setProfileData);
+  }, []);
 
-  fetchData();
-}, []);
+  useEffect(() => {
+    handleDataFetch('/proyect', setProyectsData);
+  }, []);
 
-// EXPERIENCE DATA
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const token = localStorage.getItem('access_token');
-      const respuesta = await axios.get(`/experience`, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-          "Content-Type": 'application/json',
-        },
-        withCredentials: true,
-      });
-      setExperienceData(respuesta.data);
-    } catch (error) {
-      setHasError(true);
-      setNotVisible(true);
-      setTypeNot("error");
-      setMessageNot("Error fetching data... Please try again later");
-    }
-  };
+  useEffect(() => {
+    handleDataFetch('/experience', setExperienceData);
+  }, []);
 
-  fetchData();
-}, []);
-
-// SKILLS DATA
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const token = localStorage.getItem('access_token');
-      const respuesta = await axios.get(`/skills`, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-          "Content-Type": 'application/json',
-        },
-        withCredentials: true,
-      });
-      setSkillsData(respuesta.data);
-    } catch (error) {
-      setHasError(true);
-      setNotVisible(true);
-      setTypeNot("error");
-      setMessageNot("Error fetching data... Please try again later");
-    }
-  };
-
-  fetchData();
-}, []);
-
-
+  useEffect(() => {
+    handleDataFetch('/skills', setSkillsData);
+  }, []);
 
   return (
     <section>
       <Header mode={mode} toggleDarkMode={toggleDarkMode} data={headerData} />
 
       <div className='pt-40 w-full fixed z-40'>
-        <Notification type={typeNot} message={getMessageNot} status={notVisible} />
+        <Notification type={typeNot} message={textNot} status={visibleNot} toggleShow={toggleShow} />
       </div>
       {profileData && proyectsData && experienceData && skillsData ? 
       <>
         <div className='pt-40 w-full fixed z-40'>
-        <Notification type={"info"} message={userRole} status={true} />
+        <Notification type={"info"} message={userRole} status={flagWelcome} toggleShow={toggleWelcome}/>
         </div>
 
 
@@ -192,7 +142,7 @@ useEffect(() => {
           redirect_uri: window.location.origin
         }}
       >
-        <Profile data={profileData} mode={mode}/>
+        <Profile data={profileData.entity} mode={mode}/>
 
       </Auth0Provider>
 

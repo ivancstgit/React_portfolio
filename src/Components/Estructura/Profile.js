@@ -72,7 +72,7 @@ export default function Profile({data, mode}) {
         <div className="flex flex-wrap ">
           <div className='w-1/3 p-12 '>
               {profile && (
-                <img className={`rounded-full border-2 border-black align-middle max-w-full ${mode ? "border-white" : "bg-black"}`} src={profile.profile_img} alt={profile.name} />
+                <img className={`rounded-full border-2 border-black align-middle max-w-full ${mode ? "border-white" : "bg-black"}`} src={profile.profile_img} alt={profile.name} draggable="false" />
               )}
           </div>
           <div className="w-2/3 flex flex-col justify-between">

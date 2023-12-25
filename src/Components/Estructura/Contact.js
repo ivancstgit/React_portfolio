@@ -9,12 +9,26 @@ import Notification from '../Utils/Notification';
 
 export default function Contact({mode}) {
   const [message, setMessage] = useState();
-  const [messageVisible, setMessageVisible] = useState(false);
-  const [notMessage, setNotMessage] = useState();
-  const [error, setError] = useState(false);
+  
   
 
   const [isadmin, setIsAdmin] = useState(false);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [msg, setMsg] = useState();
+  
+  //NOTIFICATION PARAMS
+  const [visibleNot, setVisibleNot] = useState(false);
+  const [textNot, setTextNot] = useState();
+  const [typeNot, setTypeNot] = useState();
+
+  const toggleShow = () =>{
+    setVisibleNot(visible => !visible);
+  }
+
+  useEffect(() => {
+    console.log(visibleNot);
+  }, [visibleNot]);
 
   useEffect(() => {
     getMessage();
@@ -49,9 +63,9 @@ export default function Contact({mode}) {
 
     try {
       const messageData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        text_message: document.getElementById("message").value
+        name: name,
+        email: email,
+        text_message: msg
       }
   
       const token = localStorage.getItem('access_token');
@@ -62,24 +76,43 @@ export default function Contact({mode}) {
         },
         withCredentials: true,
       });
+      
+      
+      setTextNot("Message send succesfully")
+      setVisibleNot(true)
+      setTypeNot("success")
+
+      setTimeout(() => {
+        // La función que se ejecutará después de 3 segundos si show es true
+        setVisibleNot(false)
+        // Aquí puedes llamar a la función que necesitas ejecutar
+      }, 4000);
+
       document.getElementById("name").value="";
       document.getElementById("email").value="";
       document.getElementById("message").value="";
-      setNotMessage("Message send succesfully")
-      setMessageVisible(true)
+
+       
 
     } catch (error) {
-      setNotMessage("An error ocurred please try again later");
-      setMessageVisible(true)
-      setError(true);
+      setTextNot("An error ocurred please try again later");
+      setVisibleNot(true)
+      setTypeNot("error")
+      setTimeout(() => {
+        // La función que se ejecutará después de 3 segundos si show es true
+        setVisibleNot(false)
+        // Aquí puedes llamar a la función que necesitas ejecutar
+      }, 4000);
+      
     }
     
   }
 
   return (
     <section id='contact'>
-      {!error && notMessage && (<Notification type="success" message={notMessage} status={messageVisible} ></Notification>)}
-      {error && notMessage && (<Notification type="error" message={notMessage} status={messageVisible} ></Notification>)}
+      {textNot && (
+                                <Notification type={typeNot} message={textNot} status={visibleNot} toggleShow={toggleShow}/>
+                 )}
 
       <div className={`flex flex-wrap justify-center my-20 lg:mx-16 items-center  xl:border ${mode ? "xl:bg-black" : "xl:bg-white xl:border-black"} `} >
         {isadmin && !message && (<Loading></Loading>)}
@@ -124,16 +157,16 @@ export default function Contact({mode}) {
             </div>
 
             <div className={` p-8 m-4 lg:mt-8 xl:border-none border ${mode ? "bg-black" : "bg-white border-black"} `}>
-              <form className='block' role="form" onSubmit={postMessage}>
+              <form className='block' onSubmit={postMessage}>
                 <p className='py-4'> Or send me a message directly from this app...</p>
-                <input name="name" type="text" className="form-control" id="name" placeholder="Your Name" required/>
+                <input name="name" type="text" className="form-control" id="name" placeholder="Your Name" autoComplete="off" onChange={(e) => setName(e.target.value)} required/>
 
-                <input name="email" type="email" className="form-control" id="email" placeholder="Your Email" required/>
+                <input name="email" type="email" className="form-control" id="email" placeholder="Your Email" onChange={(e) => setEmail(e.target.value)} required/>
 
-                <textarea name="message" rows="5" className="form-control text-area" id="message" placeholder="Your Message" required></textarea>
+                <textarea name="message" rows="5" className="form-control text-area" id="message" placeholder="Your Message" autoComplete="off" onChange={(e) => setMsg(e.target.value)} required></textarea>
 
 
-                <input name="send" type="submit" className={`form-control ${mode ? "input-bg-dark" : "input-bg-light"} `} id="send" value="SEND ME" />
+                <input name="send" type="submit" className={`form-control cursor-pointer ${mode ? "input-bg-dark" : "input-bg-light"} `} id="send" value="SEND ME" />
               </form>
             </div>
           </>

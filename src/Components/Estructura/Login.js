@@ -23,16 +23,20 @@ export default function Login() {
     const [user, setUser] = useState('');
     const [passw, setPassw] = useState('');
     
-    const [errMsg, setErrMsg] = useState('');
-    const [visibleMsg, setVisbleMsg] = useState(false);
 
+    const [visibleNot, setVisibleNot] = useState(false);
+    const [textNot, setTextNot] = useState("");
+
+    const toggleShow = () =>{
+        setVisibleNot(visible => !visible);
+      }
 
     useEffect(() => {
         userRef.current.focus();
     }, [])
 
     useEffect(() => {
-        setErrMsg('');
+        setTextNot('');
     }, [user, passw])
 
 
@@ -61,13 +65,18 @@ export default function Login() {
         } catch (error) {
 
             if (!error?.response) {
-                setErrMsg('No Server Response');
+                setTextNot('No Server Response');
             } else if (error.response?.status === 403) {
-                setErrMsg('Wrong Username or Password');
+                setTextNot('Wrong Username or Password');
             } else {
-                setErrMsg('Login Failed');
+                setTextNot('Login Failed');
             }
-            setVisbleMsg(true);
+            setVisibleNot(true);
+            setTimeout(() => {
+                // La función que se ejecutará después de 3 segundos si show es true
+                setVisibleNot(false);
+                // Aquí puedes llamar a la función que necesitas ejecutar
+              }, 3000);
             
         }
     }
@@ -94,13 +103,18 @@ export default function Login() {
 
         } catch (error) {
             if (!error?.response) {
-                setErrMsg('No Server Response');
+                setTextNot('No Server Response');
             } else if (error.response?.status === 403) {
-                setErrMsg('Wrong Username or Password');
+                setTextNot('Wrong Username or Password');
             } else {
-                setErrMsg('Login Failed');
+                setTextNot('Login Failed');
             }
-            setVisbleMsg(true);
+            setVisibleNot(true);
+            setTimeout(() => {
+                // La función que se ejecutará después de 3 segundos si show es true
+                setVisibleNot(false);
+                // Aquí puedes llamar a la función que necesitas ejecutar
+              }, 3000);
         }
     }
 
@@ -108,8 +122,8 @@ export default function Login() {
     return (
         <>
             <section>
-                {errMsg && (
-                                <Notification type={"error"} message={errMsg} status={visibleMsg}/>
+                {textNot && (
+                                <Notification type={"error"} message={textNot} status={visibleNot} toggleShow={toggleShow}/>
                  )}
                 <div className="wrapper">
                     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">                        

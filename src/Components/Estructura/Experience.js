@@ -33,7 +33,7 @@ export default function Experiences({data, mode}) {
                                 </h2>
                             </div>
                             <div className='mt-6 mx-auto flex relative text-center box-content w-24 h-24'>
-                            <img className="align-middle max-w-full h-auto" src={'data:image/jpeg;base64,' + item.image}/>
+                            <img className="align-middle max-w-full h-auto" src={'data:image/jpeg;base64,' + item.image} draggable="false"/>
                             </div>
                             <p className='mt-4'>
                                 {item.description}

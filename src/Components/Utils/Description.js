@@ -4,88 +4,49 @@ import { useRef, useState } from 'react';
 import '../../Styles/Description.css'
 
 export default function Description({ name, description }) {
-
-    const containerName = useRef(null);
-    const containerDesc = useRef(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [positionDesc, setPositionDesc] = useState({ x: window.innerWidth * 2, y: 0 });
-
-
-    const ChangePositionName = () => {
-        setPosition({ x: window.innerWidth * 2, y: 0 });
-        setPositionDesc({ x: 0, y: 0 })
-    }
-
-    const ChangePositionDescription = () => {
-        setPositionDesc({ x: window.innerWidth * 2, y: 0 });
-        setPosition({ x: 0, y: 0 })
-    }
-
-
-    const handleStop = (e, data) => {
-        if (data.x > 50) {
-            ChangePositionName();
-        }
-
-    };
-
-    const handleStopDesc = (e, data) => {
-        if (data.x > 50) {
-            ChangePositionDescription();
-        }
-
-    };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-          autoChange()
-        }, 5000);
+    const [isVisible, setIsVisible] = useState(true);
+    const intervalRef = useRef(null);
     
-        return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonta
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+        
+    
+        // Reiniciar el temporizador
+        clearInterval(intervalRef.current);
+        startTimer();
+      };
+    
+      const startTimer = () => {
+        intervalRef.current = setInterval(() => {
+          setIsVisible((prevVisibility) => !prevVisibility);
+        }, 6000);
+      };
+    
+      useEffect(() => {
+        startTimer();
+    
+        // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
+        return () => clearInterval(intervalRef.current);
       }, []);
 
-    const autoChange = () =>{
-        const positionName = containerName.current.getBoundingClientRect().x;
-        const positionDesc = containerDesc.current.getBoundingClientRect().x;
-        const dif = positionName-positionDesc
-
-        if(dif>0){
-            ChangePositionDescription();
-        }else{
-            ChangePositionName()
-        }        
-    }
 
     return (
 
-        <div className="cursor-grabbing mx-auto my-auto flex  font-semibold text-bg items-start">
-            <Draggable
-                axis='x'
-                position={position}
-                nodeRef={containerName}
-                onStop={handleStop}
-                bounds={{ left: 0, top: 0, bottom: 0 }}
+        <div className="cursor-pointer mx-auto my-auto flex  font-semibold text-bg items-start">
 
-            >
-                <div ref={containerName} className='draggable-items absolute'>
-                    <h1 className='text-lg'>Hello! I'm</h1>
-                    <p className='p-4 ml-16 text-3xl'>{name}</p>
-                </div>
-            </Draggable>
+            <div  className={`absolute transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+                <a onClick={toggleVisibility}>
+                <h1 className="text-lg">Hello! I'm</h1>
+                <p className="p-4 ml-16 text-3xl">{name}</p>
+                </a>
+            </div>
 
-            <Draggable
-                axis='x'
-                position={positionDesc}
-                nodeRef={containerName}
-                onStop={handleStopDesc}
-                bounds={{ left: 0, top: 0, bottom: 0 }}
-            >
-                <div ref={containerDesc} className='draggable-items'>
-                    <h1 className='text-lg '>Who Am I?</h1>
-                    <p className='p-4 ml-16 text-xl'>{description}</p>
-                </div>
-            </Draggable>
-
+            <div className={`transition-opacity duration-1000 ${isVisible ? 'opacity-0' : 'opacity-100'}`}>
+                <a onClick={toggleVisibility}>
+                <h1 className="text-lg">Who Am I?</h1>
+                <p className="p-4 ml-16 text-xl">{description}</p>
+            </a>
+            </div>
         </div>
 
     )
