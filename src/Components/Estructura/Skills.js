@@ -36,7 +36,7 @@ export default function Skills({data, mode}) {
                             <small>{item.porcent}%</small>
 
                         </div>
-                        <div className='progress ' style={{ "--progress": `${item.porcent}%` }}>
+                        <div className='progress ' style={{ "--variable": `${item.porcent}%` }}>
                             <div className={`bar ${mode ? "progress-dark" : "progress-light"}`}></div>
                         </div>
                     </div>

@@ -1,13 +1,5 @@
-:root {
-  @property --progress {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 0%;
-  }
-}
-
 .progress {
-    --progress: 0%;
+    --variable: 0%;
     width: auto;
     height: 40px;
     border: 1px solid #fff;
@@ -16,7 +8,7 @@
   }
   
   .progress .bar{
-    width: var(--progress);
+    width: var(--variable);
     height: 100%;
     /*background: linear-gradient(#f2f2f2, #000000, #f2f2f2);*/
     background-repeat: repeat;
