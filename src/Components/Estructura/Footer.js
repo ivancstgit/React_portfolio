@@ -5,8 +5,14 @@ export default function Footer() {
     
   return (
     <section>
-      <div className='flex item-center justify-center bg-black py-5 footer text-gray-400'>
-        Copyright © 2023 My Personal Portfolio . Designed by Casatti Ivan
+      <div className=' bg-black py-5 text-gray-400 px-4'>
+        <div className='flex flex-wrap item-center justify-center'>
+        Copyright © 2023 Mi Portfolio personal.
+        <p className='px-2'>
+        Diseñado por Casatti Ivan 
+        </p>
+        </div>
+        <div className='border-b border-gray-400 pt-2 w-20 mx-auto'></div>
       </div>
     </section>
     

@@ -1,8 +1,6 @@
 
 
 import React, { useEffect, useState } from 'react';
-import axios from '../../api/axios';
-import Loading from '../Utils/Loading';
 import '../../Styles/Proyects.css';
 
 
@@ -21,15 +19,15 @@ export default function Proyects({data}) {
                     <div className="xl:w-1/3 px-auto py-4 my-auto">
                         <div>
                             <div className="proyect_title mb-8 flex">
-                                <span className='mr-2 text-lg'>My</span>
-                                <h2>Proyects</h2>
+                                <span className='mr-2 text-lg'>Mis</span>
+                                <h2>Proyectos</h2>
                             </div>
-                            <p className='mb-8 px-4'>All my pending and completed projects represent my passion and dedication for my profession.
+                            <p className='mb-8 px-4'>Todos mis proyectos pendientes y completados representan mi pasión y dedicación para mi profesión.
                             <br/>
                             <br/>
-                            Each of them demonstrates my commitment to excellence and constant desire to overcome challenges.</p>
+                            Cada uno de ellos demuestra mi compromiso a la excelencia y al constante deseo de superar desafios.</p>
                             <a href="https://github.com/IvanCsTGit" target='_blank' rel="noopener noreferrer" className="bg-transparent primary-btn">
-                                View my repositories in git</a>
+                                Mira mis repositorios en git</a>
                         </div>
                     </div>
                     <div className="xl:w-2/3 pl-4 mt-4">

@@ -20,12 +20,10 @@ export default function Experiences({data, mode}) {
             <div className="mx-auto flex flex-wrap mr-4 ml-4 p-4">
                 <div className='flex flex-col justify-center mx-auto'>
                     <div className="font-semibold text-3xl pb-8 mx-auto px-8">
-                        <h2>Knowleage And Experience</h2>
+                        <h2>Experiencia y Estudios</h2>
                     </div>
-                    <div className='grid grid-cols-2 mx-auto'>
+                    <div className='grid grid-cols-2 mx-auto max-[900px]:grid-cols-1'>
                     {experience && experience.map((item, index) => (
-                                
-                            
                         <div className={`m-8 p-8 text-center ${mode ? "bg-zinc-900" : "bg-zinc-200"}`} key={index}>
                             <div className='text-2xl exp relative'>
                                 <h2>

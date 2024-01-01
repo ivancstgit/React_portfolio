@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import MoonLoader from "react-spinners/MoonLoader";
-import '../../Styles/Loading.css'
+import '../../Styles/Loading.css';
 
 export default function Loading({ mode }) {
   const [flag, setFlag] = useState();
-
 
   useEffect(() => {
     setTimeout(() => {

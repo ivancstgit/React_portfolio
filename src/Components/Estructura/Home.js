@@ -1,9 +1,6 @@
-import Header from "./Header";
+import { useEffect, useState } from "react";
+import '../../Styles/Home.css';
 import Body from "./Body";
-import '../../Styles/Home.css'
-import { useState, useEffect } from "react";
-import Notification from "../Utils/Notification";
-import { jwtDecode } from "jwt-decode";
 
 export default function Home() {
 

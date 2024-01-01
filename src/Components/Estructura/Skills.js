@@ -1,7 +1,5 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import axios from '../../api/axios';
-import '../../Styles/Skills.css'
+import React, { useEffect, useState } from 'react';
+import '../../Styles/Skills.css';
 
 export default function Skills({data, mode}) {
     const [skills, setSkills] = useState();
@@ -12,24 +10,25 @@ export default function Skills({data, mode}) {
     }, [data]);
 
     return (
-        <section id='skills' className='flex py-8'>
-            <div className="w-1/2 px-16 mt-6 pb-16  flex flex-col text-center">
+        <section id='skills' className='flex flex-wrap py-8 justify-center'>
+            
+            <div className="min-[900px]:w-1/2 px-16 mt-6 pb-16 flex flex-col text-center">
                 <h2 className="text-4xl font-bold">
-                    Soft Skills
+                    Habilidades
                 </h2>
                 <div className="pt-8 px-auto text-xl">
-                Throughout my professional life 
+                A lo largo de mi carrera profesional
                 <br></br>
-                i have managed to acquire several skills...
+                he logrado adquirir varias habilidades...
                 <p className='pt-8'>
-                But, in which skills do I <strong className='underline'>stand out</strong>?
+                Pero, ¿Cuáles son las habilidades en las que <strong className='underline'>destaco</strong>?
                 </p>
                 </div>
                 
             </div>
-            <div className='w-1/2 flex flex-col'>
+            <div className='min-[900px]:w-1/2 flex flex-col max:[900px]:px-4 min-[900px]:pr-16 '>
                 {skills && skills.map((item, index) => (
-                    <div key={index} className='pr-16 pt-4'>
+                    <div key={index} className='pt-4 max-[900px]:w-80'>
                         <div className="flex justify-between items-end">
                             <span className="font-semibold">
                                 {item.name}
@@ -46,7 +45,6 @@ export default function Skills({data, mode}) {
 
 
                 ))}
-
             </div>
         </section>
     )

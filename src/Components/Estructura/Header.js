@@ -1,15 +1,11 @@
-import React, { useRef } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useState, useEffect, Suspense } from 'react';
-import axios from '../../api/axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { FaDiscord, FaTwitter, FaFacebook, FaInstagram, FaLinkedin, FaPhone, FaGithub } from "react-icons/fa";
-import { IoMdMail } from "react-icons/io";
-import Loading from '../Utils/Loading';
-import { Tooltip } from "react-tooltip";
-import { Link } from 'react-scroll';
+import { FaDiscord, FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaPhone, FaSun, FaTwitter } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa6";
-import { FaSun } from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
+import { Link } from 'react-scroll';
+import { Tooltip } from "react-tooltip";
 
 import '../../Styles/Header.css';
 
@@ -36,29 +32,29 @@ export default function Header({mode, toggleDarkMode, data}) {
           to="profile" spy={true} smooth={true} offset={-96} duration={700}>
           <img src={image} alt="icon" className='w-20 rounded-full' />
         </Link>
-        <div className="flex items-center ml-auto">
-          <ul className="flex items-center">
+        <div className="flex items-center ml-auto ">
+          <ul className="flex items-center max-[1100px]:hidden">
             <li className='p-4 font-semibold'>
               <Link className='cursor-pointer px-4'
                 to="proyects" spy={true} smooth={true} offset={-105} duration={700}>
-                Proyects
+                Proyectos
               </Link>
               <Link className='cursor-pointer px-4'
                 to="experiences" spy={true} smooth={true} offset={-75} duration={700}>
-                Experience
+                Experiencia
               </Link>
               <Link className='cursor-pointer px-4'
                 to="skills" spy={true} smooth={true} offset={-110} duration={700}>
-                Skills
+                Habilidades
               </Link>
               <Link className='cursor-pointer px-4'
                 to="contact" spy={true} smooth={true} offset={-98} duration={700}>
-                Contact
+                Contacto
               </Link>
             </li>
           </ul>
 
-          <div className={`flex items-center px-6  border-l border-r ${mode ? "border-white" : "border-black"}`}>
+          <div className={`flex items-center px-6  border-l border-r max-[600px]:hidden ${mode ? "border-white" : "border-black"}`}>
               
               {!media && <div className={`loader_header mx-5 ${mode ? "bg-white" : "bg-black"}`}></div>}
               <ul className='flex'>
@@ -94,7 +90,7 @@ export default function Header({mode, toggleDarkMode, data}) {
           </div>
 
         </div>
-        <div className="flex items-center ml-6">
+        <div className="flex items-center ml-6 max-[950px]:ml-auto">
           <a onClick={logout} className={`${mode ? "btn-dark":"btn-light"} -my-2.5 justify-center rounded-lg text-base font-semibold py-2.5 px-4 mx-4 cursor-pointer`}>Logout</a>
           <button onClick={toggleDarkMode} className={`ml-4 border rounded-full flex ${mode ? "border-white" : "border-black"}`}>
       {/* {mode ? ( */}

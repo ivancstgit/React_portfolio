@@ -1,19 +1,18 @@
 
 
-import React from 'react'
-import Profile from './Profile'
 import { Auth0Provider } from '@auth0/auth0-react';
-import Proyects from './Proyects';
-import Skills from './Skills';
-import Experiences from './Experience';
-import Contact from './Contact';
-import Footer from './Footer';
-import Notification from '../Utils/Notification';
-import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import Header from './Header';
+import React, { useEffect, useState } from 'react';
 import axios from '../../api/axios';
 import Loading from '../Utils/Loading';
+import Notification from '../Utils/Notification';
+import Contact from './Contact';
+import Experiences from './Experience';
+import Footer from './Footer';
+import Header from './Header';
+import Profile from './Profile';
+import Proyects from './Proyects';
+import Skills from './Skills';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -75,7 +74,6 @@ export default function Body({ mode, toggleDarkMode}) {
         },
         withCredentials: true,
       });
-      console.log(respuesta.data)
       setDataFunction(respuesta.data);
       
     } catch (error) {

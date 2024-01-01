@@ -1,11 +1,10 @@
 
-import React from 'react'
-import { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import axios from '../../api/axios';
-import '../../Styles/Login.css';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaLock } from 'react-icons/fa';
 import { IoMdMail } from "react-icons/io";
+import { useLocation, useNavigate } from "react-router-dom";
+import '../../Styles/Login.css';
+import axios from '../../api/axios';
 import Notification from '../Utils/Notification';
 
 const LOGIN_URL = '/auth/signin';
@@ -27,6 +26,9 @@ export default function Login() {
     const [visibleNot, setVisibleNot] = useState(false);
     const [textNot, setTextNot] = useState("");
 
+
+    const [flag, setFlag] = useState(false);
+
     const toggleShow = () =>{
         setVisibleNot(visible => !visible);
       }
@@ -41,6 +43,7 @@ export default function Login() {
 
 
     const formSubmit = async (e) => {
+        setFlag(true);
         e.preventDefault();
         try {
             const response = await axios.post(LOGIN_URL,
@@ -73,19 +76,18 @@ export default function Login() {
             }
             setVisibleNot(true);
             setTimeout(() => {
-                // La función que se ejecutará después de 3 segundos si show es true
                 setVisibleNot(false);
-                // Aquí puedes llamar a la función que necesitas ejecutar
+                
               }, 3000);
+            setFlag(false);
             
         }
     }
 
     const signGuest = async (e) => {
+        setFlag(true);
         e.preventDefault();
-        const a = "";
         try {
-            console.log(user, passw)
             const response = await axios.post(LOGIN_URL,
                 {
                     email: "guest@gmail.com",
@@ -111,10 +113,10 @@ export default function Login() {
             }
             setVisibleNot(true);
             setTimeout(() => {
-                // La función que se ejecutará después de 3 segundos si show es true
+                
                 setVisibleNot(false);
-                // Aquí puedes llamar a la función que necesitas ejecutar
               }, 3000);
+              setFlag(false);
         }
     }
 
@@ -125,16 +127,18 @@ export default function Login() {
                 {textNot && (
                                 <Notification type={"error"} message={textNot} status={visibleNot} toggleShow={toggleShow}/>
                  )}
-                <div className="wrapper">
-                    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">                        
-                        <div className="login-box">
-                            <form onSubmit={formSubmit}>
+                <div className={`wrapper ${flag ? 'hover:cursor-wait' : ''} `}>
+                    <div className="">                        
+                        <div className="login-box relative px-12">
+
+                            <form onSubmit={formSubmit} className='flex flex-col items-center justify-center'>
                                 <h2 className='login-text'>Login</h2>
 
-                                <div className="input-box"> <span className="icon">
+                                <div className="input-box w-[310px] max-[400px]:w-full"> <span className="icon">
                                     <IoMdMail/>
                                 </span>
-                                    <input type="email"
+                                    <input
+                                        type="email"
                                         id="username"
                                         ref={userRef}
                                         autoComplete="off"
@@ -144,16 +148,16 @@ export default function Login() {
                                     <label>Email</label>
                                 </div>
 
-                                <div className="input-box"> <span className="icon">
+                                <div className="input-box w-[310px] max-[400px]:w-full"> <span className="icon">
                                     <FaLock/>
                                 </span>
                                     <input type="password" id="password" autoComplete="off" onChange={(e) =>
                                         setPassw(e.target.value)} value={passw} required />
                                     <label>Password</label>
                                 </div>
-                                <button className="buttonLogin" type="submit">Sign In</button>
+                                <button className="buttonLogin mt-4" type='submit'>Sign In</button>
                                 <div className="register-link">
-                                    <p>Don't have an account? <a className='cursor-pointer' onClick={signGuest}>Sign as guest</a></p>
+                                    <p>Don't have an account? <a className={`${flag ? 'cursor-wait' : 'cursor-pointer'} `} onClick={signGuest}>Sign as guest</a></p>
                                 </div>
                             </form>
                         </div>

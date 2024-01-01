@@ -20,8 +20,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100%;
-    /*background: url('https://us.123rf.com/450wm/natrot/natrot1608/natrot160800105/61348388-degradado-azul-abstracto-se-utiliza-como-fondo-para-la-exhibici%C3%B3n-de-productos-vector.jpg') no-repeat;*/
+    width: 100vw;
     background: url('https://i.pinimg.com/originals/18/ad/b7/18adb7094eb7d2a71d4bfc6d8c58ef29.jpg') no-repeat;
     background-color: gray;
     background-size: cover;
@@ -46,8 +45,7 @@
 }
 
 .login-box {
-    position: relative;
-    width: 400px;
+    width: auto;
     height: 450px;
     background: transparent;
     border-radius: 15px;
@@ -66,7 +64,6 @@
 
 .input-box {
     position: relative;
-    width: 310px;
     margin: 30px 0;
     border-bottom: 1px solid #fff;
 }
@@ -157,17 +154,3 @@ button.buttonLogin {
     text-decoration: underline;
 }
 
-
-
-@media (max-width:500px) {
-    .login-box {
-        width: 100%;
-        height: 100vh;
-        border: none;
-        border-radius: 0;
-    }
-
-    .input-box {
-        width: 290px;
-    }
-}

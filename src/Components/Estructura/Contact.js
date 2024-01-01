@@ -130,10 +130,10 @@ export default function Contact({mode}) {
             <div className={`mx-6 mb-6  flex flex-col xl:border-none border p-4 ${mode ? "bg-black" : "bg-white border-black"} `}>
               <div className='mx-auto my-8 items-center flex flex-col'>
                 <p>
-                  Want more information?
+                  Quieres mas informacion?
                 </p>
                 <div className="text-xl">
-                  CONTACT ME
+                  CONTACTAME
                 </div>
               </div>
               <div className='px-8 py-4 flex items-center'>
@@ -158,7 +158,7 @@ export default function Contact({mode}) {
 
             <div className={` p-8 m-4 lg:mt-8 xl:border-none border ${mode ? "bg-black" : "bg-white border-black"} `}>
               <form className='block' onSubmit={postMessage}>
-                <p className='py-4'> Or send me a message directly from this app...</p>
+                <p className='py-4'> O enviame un mensaje directamente de esta aplicacion...</p>
                 <input name="name" type="text" className="form-control" id="name" placeholder="Your Name" autoComplete="off" onChange={(e) => setName(e.target.value)} required/>
 
                 <input name="email" type="email" className="form-control" id="email" placeholder="Your Email" onChange={(e) => setEmail(e.target.value)} required/>

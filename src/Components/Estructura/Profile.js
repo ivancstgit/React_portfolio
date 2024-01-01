@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react'
 import { useAuth0 } from '@auth0/auth0-react';
-import axios from '../../api/axios';
 import { jwtDecode } from 'jwt-decode';
-import '../../Styles/Profile.css'
+import React, { useEffect, useState } from 'react';
+import '../../Styles/Profile.css';
+import axios from '../../api/axios';
 import Description from '../Utils/Description';
-import Notification from '../Utils/Notification';
 
 export default function Profile({data, mode}) {
   const {
@@ -69,13 +68,13 @@ export default function Profile({data, mode}) {
   return (
     <section id="profile" className=''>
       <div className='pt-32'>
-        <div className="flex flex-wrap ">
-          <div className='w-1/3 p-12 '>
+        <div className="flex flex-wrap">
+          <div className='min-[800px]:w-1/3  min-[800px]:p-12 max-[800px]:py-8 flex justify-center'>
               {profile && (
-                <img className={`rounded-full border-2 border-black align-middle max-w-full ${mode ? "border-white" : "bg-black"}`} src={profile.profile_img} alt={profile.name} draggable="false" />
+                <img className={`rounded-full border-2 border-black align-middle max-w-full max-[800px]:w-2/5 ${mode ? "border-white" : "bg-black"}`} src={profile.profile_img} alt={profile.name} draggable="false" />
               )}
           </div>
-          <div className="w-2/3 flex flex-col justify-between">
+          <div className="min-[800px]:w-2/3 flex flex-col justify-between max-[800px]:px-16 max-[800px]:mx-auto">
             {profile && (
               <Description name={profile.name} description={profile.description}></Description>
             )}

@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { MdOutlineReportGmailerrorred } from "react-icons/md";
-import { FiAlertTriangle } from "react-icons/fi";
-import { MdDoneOutline } from "react-icons/md";
+import React, { useEffect, useState } from 'react';
 import { FaInfo } from "react-icons/fa";
+import { FiAlertTriangle } from "react-icons/fi";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { MdDoneOutline, MdOutlineReportGmailerrorred } from "react-icons/md";
 
-import '../../Styles/Notification.css'
-import { get } from 'react-scroll/modules/mixins/scroller';
+import '../../Styles/Notification.css';
 
 export default function Notification({ message, type, status, toggleShow }) {
     const [getType, setType] = useState();
