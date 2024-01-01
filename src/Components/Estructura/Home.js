@@ -8,9 +8,6 @@ export default function Home() {
     
     const [background,setBackground] = useState();
 
-    const dark = ["img-dark1", "img-dark2", "img-dark3"]
-    const light = ["img-light1", "img-light2", "img-light3"]
-
     useEffect(() =>{
         if(darkmode){
             setBackground("img-dark1 text-white");
