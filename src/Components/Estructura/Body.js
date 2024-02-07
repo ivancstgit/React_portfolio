@@ -16,6 +16,7 @@ import Skills from './Skills';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const LOGIN_URL = '/auth/signin';
 
 export default function Body({ mode, toggleDarkMode}) {
 
@@ -29,7 +30,7 @@ export default function Body({ mode, toggleDarkMode}) {
   const [proyectsData, setProyectsData] = useState();
 
   const [hasError, setHasError] = useState(false);
-  const [userRole, setUserRole] = useState();
+  const [userRole, setUserRole] = useState("!!!Welcome!!!");
 
   //NOTIFICATION PARAMS
   const [visibleNot, setVisibleNot] = useState(false);
@@ -42,29 +43,64 @@ export default function Body({ mode, toggleDarkMode}) {
   }
   //----------------------------------
 
+  useEffect(() => {
+    setTimeout(() => {
+      toggleWelcome();
+    }, 3000);
+  }, []);
 
   //welcome notification
   const toggleWelcome = () =>{
     setFlagWelcome(false)
   }
-  
-  useEffect(() => {
-        const access_token = localStorage.getItem('access_token');
-        const decoded = jwtDecode(access_token);
-        if (decoded.role == "ADMIN") {
-            setUserRole("Welcome you are logged as Admin")
-        } else {
-          setUserRole("Welcome you are logged as Guest")
-        }
+    
+  const getToken = async (e) => {
+    try {
+        const response = await axios.post(LOGIN_URL,
+            {
+                email: "guest@gmail.com",
+                password: "123",
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                withCredentials: true,
+            });
 
+        const access_token = response?.data?.access_token;
+
+        localStorage.setItem("access_token", access_token);
+        return access_token;
+
+    } catch (error) {
+        if (!error?.response) {
+            setTextNot('No Server Response');
+        } else {
+            setTextNot('An error ocurred... Please try again later');
+        }
+        setVisibleNot(true);
         setTimeout(() => {
-          // La función que se ejecutará después de 3 segundos si show es true
-          toggleWelcome();
-          // Aquí puedes llamar a la función que necesitas ejecutar
-        }, 3000);
-    }, [])
+            setVisibleNot(false);
+          }, 3000);
+    }
+}
+
+
 //------------------------------------------------
   const handleDataFetch = async (endpoint, setDataFunction) => {
+        
+        const access_token = localStorage.getItem('access_token');
+        
+        if(!access_token){
+          access_token = getToken();
+        }
+
+        const decoded = jwtDecode(access_token);
+  
+        const currentTimeInSeconds = Math.floor(Date.now() / 1000);
+        if(decoded.exp < currentTimeInSeconds){
+          getToken();
+        }
+
     try {
       const token = localStorage.getItem('access_token');
       const respuesta = await axios.get(endpoint, {
@@ -87,13 +123,10 @@ export default function Body({ mode, toggleDarkMode}) {
         // Aquí puedes llamar a la función que necesitas ejecutar
       }, 3000);
     }
+    
   };
 
   useEffect(() => {
-    const access_token = localStorage.getItem('access_token');
-    const decoded = jwtDecode(access_token);
-    setUserRole(decoded.role === 'ADMIN' ? 'Welcome you are logged as Admin' : 'Welcome you are logged as Guest');
-
     setTimeout(() => {
       toggleWelcome();
     }, 3000);

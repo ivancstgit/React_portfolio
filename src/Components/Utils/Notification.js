@@ -49,7 +49,7 @@ export default function Notification({ message, type, status, toggleShow }) {
         <div className='fixed notification absolute text-white flex justify-center'>
             <div className={`z-40  overlay ${visibility ? "active" :""}  items-center justify-center flex`}>
                 <div className='w-auto h-auto items-center justify-center flex'>
-                <div className={`absolute rounded shadow-not bg-black ${type} py-5 px-6 shadow shadow-${getColor}-700  items-center justify-center flex`}>
+                <div className={`w-[315px] absolute rounded shadow-not bg-black ${type} py-5 px-6 shadow shadow-${getColor}-700  items-center justify-center flex`}>
 
                     <a className={`cursor-pointer btnClose shadow shadow-${getColor}-700`} onClick={toggleShow}><IoCloseCircleOutline color={getColor} size={20} /></a>
                     

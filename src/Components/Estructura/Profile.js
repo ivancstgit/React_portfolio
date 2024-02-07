@@ -21,15 +21,10 @@ export default function Profile({data, mode}) {
 
   const vinculate = async () => {
     try {
-
-      const description = "A System Engineer, Web And Videogames Developer"
-      if (profile.description) {
-        description = profile.description
-      }
-
+      console.log(user.picture)
       const datosVincular = {
         profile_img: user.picture,
-        description: description,
+        description: profile.description,
         name: user.name,
       };
 
@@ -49,19 +44,11 @@ export default function Profile({data, mode}) {
 
 
     } catch (error) {
-      console.error("Error durante el proceso de vinculación:", error);
-      // Manejar el error según tus necesidades
+      console.error("Vinculate process error:", error);
     }
   };
 
 
-
-  const isAdmin = () => {
-    const access_token = localStorage.getItem('access_token');
-    const decoded = jwtDecode(access_token);
-    return (decoded.role == "ADMIN")
-
-  }
 
 
   //TODO: MANEJO DE ERRORES
@@ -77,19 +64,6 @@ export default function Profile({data, mode}) {
           <div className="min-[800px]:w-2/3 flex flex-col justify-between max-[800px]:px-16 max-[800px]:mx-auto">
             {profile && (
               <Description name={profile.name} description={profile.description}></Description>
-            )}
-
-            {isAdmin() && (
-              <div className="flex flex-col items-center">
-                <div className='p-2 mx-8 mb-2 mt-auto flex bg-white text-black font-semibold  rounded-lg
-                  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-700'>
-                  <button onClick={login}>Login Linkedin</button>
-                </div>
-                <div className='p-2 mx-8 mt-2 mb-auto flex bg-white text-black font-semibold  rounded-lg
-                  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-700'>
-                  <button onClick={vinculate}>Vincular</button>
-                </div>
-              </div>
             )}
 
           </div>

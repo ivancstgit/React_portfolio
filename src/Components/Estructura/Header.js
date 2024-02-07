@@ -37,19 +37,19 @@ export default function Header({mode, toggleDarkMode, data}) {
             <li className='p-4 font-semibold'>
               <Link className='cursor-pointer px-4'
                 to="proyects" spy={true} smooth={true} offset={-105} duration={700}>
-                Proyectos
+                Proyects
               </Link>
               <Link className='cursor-pointer px-4'
                 to="experiences" spy={true} smooth={true} offset={-75} duration={700}>
-                Experiencia
+                Experience
               </Link>
               <Link className='cursor-pointer px-4'
                 to="skills" spy={true} smooth={true} offset={-110} duration={700}>
-                Habilidades
+                Skills
               </Link>
               <Link className='cursor-pointer px-4'
                 to="contact" spy={true} smooth={true} offset={-98} duration={700}>
-                Contacto
+                Contact
               </Link>
             </li>
           </ul>
@@ -91,9 +91,8 @@ export default function Header({mode, toggleDarkMode, data}) {
 
         </div>
         <div className="flex items-center ml-6 max-[950px]:ml-auto">
-          <a onClick={logout} className={`${mode ? "btn-dark":"btn-light"} -my-2.5 justify-center rounded-lg text-base font-semibold py-2.5 px-4 mx-4 cursor-pointer`}>Logout</a>
           <button onClick={toggleDarkMode} className={`ml-4 border rounded-full flex ${mode ? "border-white" : "border-black"}`}>
-      {/* {mode ? ( */}
+      
         <div className={`transition-opacity duration-400 ${mode ? 'opacity-100' : 'opacity-0'}`}>
         <FaMoon size={30} className='transition-opacity duration-300'></FaMoon>
         </div>

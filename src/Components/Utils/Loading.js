@@ -17,7 +17,7 @@ export default function Loading({ mode }) {
       </div>
 
       {flag && (
-        <div className="pt-24">Taking too long? Please try again later</div>
+        <div className="pt-24">A free hosting service is being used... It may take a while.</div>
       )}
     </div>
   )

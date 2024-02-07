@@ -14,14 +14,14 @@ export default function Skills({data, mode}) {
             
             <div className="min-[900px]:w-1/2 px-16 mt-6 pb-16 flex flex-col text-center">
                 <h2 className="text-4xl font-bold">
-                    Habilidades
+                    Skills
                 </h2>
                 <div className="pt-8 px-auto text-xl">
-                A lo largo de mi carrera profesional
+                Through my professional career
                 <br></br>
-                he logrado adquirir varias habilidades...
+                I have managed to acquire several skills...
                 <p className='pt-8'>
-                Pero, ¿Cuáles son las habilidades en las que <strong className='underline'>destaco</strong>?
+                But in whitch of them do i <strong className='underline'>stand out</strong>?
                 </p>
                 </div>
                 
